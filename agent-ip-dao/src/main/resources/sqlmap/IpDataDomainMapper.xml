@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.silence.agentip.dao.mapper.IpDataDomainMapper" >
+  <resultMap id="BaseResultMap" type="com.silence.agentip.dao.domain.IpDataDomain" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="Source" property="source" jdbcType="VARCHAR" />
+    <result column="Type" property="type" jdbcType="VARCHAR" />
+    <result column="Ip" property="ip" jdbcType="VARCHAR" />
+    <result column="Port" property="port" jdbcType="VARCHAR" />
+    <result column="Position" property="position" jdbcType="VARCHAR" />
+    <result column="IsAnonymous" property="isAnonymous" jdbcType="INTEGER" />
+    <result column="IpType" property="ipType" jdbcType="VARCHAR" />
+    <result column="ValidateTime" property="validateTime" jdbcType="TIMESTAMP" />
+    <result column="LastUpdateTime" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Source, Type, Ip, Port, Position, IsAnonymous, IpType, ValidateTime, LastUpdateTime, 
+    CreateTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.silence.agentip.dao.domain.IpDataDomainCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_ip_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ip_data
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_ip_data
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.silence.agentip.dao.domain.IpDataDomainCriteria" >
+    delete from t_ip_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.silence.agentip.dao.domain.IpDataDomain" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ip_data (Source, Type, Ip, 
+      Port, Position, IsAnonymous, 
+      IpType, ValidateTime, LastUpdateTime, 
+      CreateTime)
+    values (#{source,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{port,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{isAnonymous,jdbcType=INTEGER}, 
+      #{ipType,jdbcType=VARCHAR}, #{validateTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.silence.agentip.dao.domain.IpDataDomain" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_ip_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="source != null" >
+        Source,
+      </if>
+      <if test="type != null" >
+        Type,
+      </if>
+      <if test="ip != null" >
+        Ip,
+      </if>
+      <if test="port != null" >
+        Port,
+      </if>
+      <if test="position != null" >
+        Position,
+      </if>
+      <if test="isAnonymous != null" >
+        IsAnonymous,
+      </if>
+      <if test="ipType != null" >
+        IpType,
+      </if>
+      <if test="validateTime != null" >
+        ValidateTime,
+      </if>
+      <if test="lastUpdateTime != null" >
+        LastUpdateTime,
+      </if>
+      <if test="createTime != null" >
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="isAnonymous != null" >
+        #{isAnonymous,jdbcType=INTEGER},
+      </if>
+      <if test="ipType != null" >
+        #{ipType,jdbcType=VARCHAR},
+      </if>
+      <if test="validateTime != null" >
+        #{validateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.silence.agentip.dao.domain.IpDataDomainCriteria" resultType="java.lang.Integer" >
+    select count(*) from t_ip_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_ip_data
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.source != null" >
+        Source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        Type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        Ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.port != null" >
+        Port = #{record.port,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        Position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAnonymous != null" >
+        IsAnonymous = #{record.isAnonymous,jdbcType=INTEGER},
+      </if>
+      <if test="record.ipType != null" >
+        IpType = #{record.ipType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validateTime != null" >
+        ValidateTime = #{record.validateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateTime != null" >
+        LastUpdateTime = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_ip_data
+    set Id = #{record.id,jdbcType=INTEGER},
+      Source = #{record.source,jdbcType=VARCHAR},
+      Type = #{record.type,jdbcType=VARCHAR},
+      Ip = #{record.ip,jdbcType=VARCHAR},
+      Port = #{record.port,jdbcType=VARCHAR},
+      Position = #{record.position,jdbcType=VARCHAR},
+      IsAnonymous = #{record.isAnonymous,jdbcType=INTEGER},
+      IpType = #{record.ipType,jdbcType=VARCHAR},
+      ValidateTime = #{record.validateTime,jdbcType=TIMESTAMP},
+      LastUpdateTime = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      CreateTime = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.silence.agentip.dao.domain.IpDataDomain" >
+    update t_ip_data
+    <set >
+      <if test="source != null" >
+        Source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        Type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        Ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        Port = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        Position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="isAnonymous != null" >
+        IsAnonymous = #{isAnonymous,jdbcType=INTEGER},
+      </if>
+      <if test="ipType != null" >
+        IpType = #{ipType,jdbcType=VARCHAR},
+      </if>
+      <if test="validateTime != null" >
+        ValidateTime = #{validateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        LastUpdateTime = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.silence.agentip.dao.domain.IpDataDomain" >
+    update t_ip_data
+    set Source = #{source,jdbcType=VARCHAR},
+      Type = #{type,jdbcType=VARCHAR},
+      Ip = #{ip,jdbcType=VARCHAR},
+      Port = #{port,jdbcType=VARCHAR},
+      Position = #{position,jdbcType=VARCHAR},
+      IsAnonymous = #{isAnonymous,jdbcType=INTEGER},
+      IpType = #{ipType,jdbcType=VARCHAR},
+      ValidateTime = #{validateTime,jdbcType=TIMESTAMP},
+      LastUpdateTime = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.silence.agentip.dao.domain.IpDataDomainCriteria" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_ip_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

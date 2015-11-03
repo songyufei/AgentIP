@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry location="/Users/SilencE/Developer/maven-repository/mysql/mysql-connector-java/5.1.25/mysql-connector-java-5.1.25.jar" />
+    <context id="agentIpTables" targetRuntime="MyBatis3" defaultModelType="conditional">
+       <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            <property name="replaceString" value="Criteria"/>
+        </plugin>
+		<!-- mvn mybatis-generator:generate -->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/agent_ip" userId="root"
+                        password="abc#123" />
+        <javaModelGenerator targetPackage="com.silence.agentip.dao.domain" targetProject="MAVEN">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="agentip" targetProject="MAVEN">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <javaClientGenerator targetPackage="com.silence.agentip.dao.mapper" targetProject="MAVEN" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+            <property name="rootInterface" value="com.silence.agentip.dao.AgentIpMapper"/>
+        </javaClientGenerator>
+        <!-- table-->
+         <table schema="agent_ip" tableName="t_ip_data" domainObjectName="IpDataDomain">
+         	<property name="useActualColumnNames" value="true"/>
+            <generatedKey column="Id" sqlStatement="Mysql" identity="true" />
+        </table>
+    </context>
+</generatorConfiguration>

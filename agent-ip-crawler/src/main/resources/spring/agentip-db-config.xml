@@ -1,0 +1,65 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+    <bean id="dataSourceAgentip" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${agentip_db_url}"/>
+        <property name="username" value="${agentip_db_username}"/>
+        <property name="password" value="${agentip_db_password}"/>
+        <property name="initialSize" value="10"/>
+        <property name="maxActive" value="50"/>
+        <property name="maxIdle" value="10"/>
+        <property name="minIdle" value="5"/>
+        <property name="maxWait" value="600000"/>
+        <!-- 一个查询10分钟内没有返回，自动放弃 -->
+        <property name="validationQuery" value="SELECT 1"/>
+        <!-- 数据库连接可用性测试语句 -->
+        <property name="testOnBorrow" value="true"/>
+        <!-- 每次获取一个连接的时候，验证一下连接是否可用，语句在validationQuery里面 -->
+        <property name="removeAbandoned" value="true"/>
+        <!-- 自动处理连接未关闭的问题，Setting this to true can recover db connections from poorly written applications which fail to close a connection.  -->
+        <property name="removeAbandonedTimeout" value="300"/>
+        <!-- 连接使用后5分钟未关闭，则抛弃 -->
+
+        <!-- 每5分钟检查一次，每次检查3个连接，如果连接空闲时间达到5分钟，则认为可以Evict，从连接池排除
+             空闲的连接是否排除对连接池似乎没有太大影响，我们只需要保证每次获取的连接都可用，所以暂时先不开启
+        <property name="timeBetweenEvictionRunsMillis" value="300000" />
+        <property name="numTestsPerEvictionRun" value="3" />
+        <property name="minEvictableIdleTimeMillis" value="320000" />-->
+    </bean>
+
+    <bean id="sqlSessionFactoryAgentip" class="org.mybatis.spring.SqlSessionFactoryBean" name="sqlSessionFactoryPyCredit">
+        <property name="dataSource" ref="dataSourceAgentip"/>
+        <property name="mapperLocations" value="classpath*:sqlmap/*.xml"/>
+    </bean>
+    <bean id="mapperScannerAgentip" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.silence.agentip.dao.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryAgentip"/>
+    </bean>
+
+    <bean id="transactionManagerAgentip" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSourceAgentip"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManagerAgentip"/>
+	<!-- 全部使用事务标注，不使用指定...
+    <tx:advice id="txAdvice" transaction-manager="transactionManagerPyCredit">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="check*" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(public * com.enniu.opencenter.biz.ebank.service.*.*(..))"/>
+        <aop:advisor pointcut-ref="pc" advice-ref="txAdvice"/>
+    </aop:config>
+     -->
+    
+</beans>
