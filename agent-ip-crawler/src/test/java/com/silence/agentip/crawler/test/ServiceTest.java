@@ -1,4 +1,4 @@
-package com.silence.agentip.crawler;
+package com.silence.agentip.crawler.test;
 
 import junit.framework.TestCase;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.silence.agentip.crawler.service.IpDataService;
+import com.silence.agentip.crawler.service.impl.IpDataService;
 import com.silence.agentip.dao.domain.IpDataDomain;
 
 @RunWith(SpringJUnit4ClassRunner.class)

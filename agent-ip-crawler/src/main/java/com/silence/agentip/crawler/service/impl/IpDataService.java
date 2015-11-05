@@ -1,13 +1,14 @@
-package com.silence.agentip.crawler.service;
+package com.silence.agentip.crawler.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.silence.agentip.crawler.service.IIpDataService;
 import com.silence.agentip.dao.domain.IpDataDomain;
 import com.silence.agentip.dao.mapper.IpDataDomainMapper;
 
 @Service
-public class IpDataService {
+public class IpDataService implements IIpDataService{
 	@Autowired
 	private IpDataDomainMapper ipDataDomainMapper;
 	

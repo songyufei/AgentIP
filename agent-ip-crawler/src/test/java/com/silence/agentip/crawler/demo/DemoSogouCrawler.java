@@ -1,4 +1,4 @@
-package com.silence.agentip.crawler;
+package com.silence.agentip.crawler.demo;
 
 import cn.edu.hfut.dmic.webcollector.crawler.DeepCrawler;
 import cn.edu.hfut.dmic.webcollector.model.Links;

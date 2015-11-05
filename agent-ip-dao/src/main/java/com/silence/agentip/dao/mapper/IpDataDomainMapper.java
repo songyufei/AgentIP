@@ -2,10 +2,14 @@ package com.silence.agentip.dao.mapper;
 
 import com.silence.agentip.dao.domain.IpDataDomain;
 import com.silence.agentip.dao.domain.IpDataDomainCriteria;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IpDataDomainMapper{
     int countByExample(IpDataDomainCriteria example);
 
