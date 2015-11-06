@@ -28,7 +28,7 @@ import com.silence.agentip.dao.mapper.IpDataDomainMapper;
  */
 public class AbstractIpCrawlerHandler extends BreadthCrawler implements CrawlerInterface<AgentIp> {
 	private static final Logger logger = LoggerFactory.getLogger(AbstractIpCrawlerHandler.class); 
-	@Resource
+	@Autowired
 	private IpDataDomainMapper ipDataDomainMapper;
 	
 	public AbstractIpCrawlerHandler(String crawlPath, boolean autoParse) {

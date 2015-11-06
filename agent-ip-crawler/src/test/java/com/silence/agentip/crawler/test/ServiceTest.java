@@ -22,7 +22,5 @@ public class ServiceTest extends TestCase {
 		System.out.println(ipDataService);
 		IpDataDomain ipDataDomain = new IpDataDomain();
 		ipDataDomain.setIp("192.168.1.1");
-		Integer cnt = ipDataService.addOneIpData(ipDataDomain);
-		System.out.println("插入记录 " + cnt + " 条");
 	}
 }

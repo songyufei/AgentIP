@@ -24,4 +24,10 @@
 	
 	<!-- 引入子配置文件 -->
 	<import resource="agentip-db-config.xml" />
+
+	<!-- 依赖注入 -->
+	<bean id="ipCrawlerHandler" class="com.silence.agentip.crawler.handler.AbstractIpCrawlerHandler">
+		<constructor-arg index="0" value="/Users/SilencE/Developer/crawler" />
+		<constructor-arg index="1" value="false" />
+	</bean>
 </beans>

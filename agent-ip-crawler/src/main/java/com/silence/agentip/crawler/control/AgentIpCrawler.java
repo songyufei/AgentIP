@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 import com.silence.agentip.crawler.handler.AbstractIpCrawlerHandler;
 import com.silence.agentip.crawler.service.impl.IpDataService;
@@ -15,6 +16,7 @@ import com.silence.agentip.crawler.service.impl.IpDataService;
  * @author SilencE<yaphets_t_t@163.com>
  * @date 2015年11月3日 下午8:04:34
  */
+@Service
 public class AgentIpCrawler {
 	private static final Logger logger = LoggerFactory.getLogger(AgentIpCrawler.class);
 	@Autowired
