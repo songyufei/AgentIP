@@ -15,8 +15,8 @@ public class Application {
 		context = new ClassPathXmlApplicationContext(new String[] { "classpath:spring/agentip-crawler-spring.xml" });
 		AbstractIpCrawlerHandler ipCrawlerHandler = (AbstractIpCrawlerHandler) context.getBean("ipCrawlerHandler");
 		try {
-			ipCrawlerHandler.setThreads(20);
-			for(int i=1;i<2;i++){
+			ipCrawlerHandler.setThreads(50);
+			for(int i = 1;i < 2;i++){
 				ipCrawlerHandler.addSeed("http://www.xicidaili.com/nn/"+i);
 			}
 			//crawler.addRegex("http://www.xicidaili.com/nn/[1-9]+");
