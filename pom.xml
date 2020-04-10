@@ -46,7 +46,7 @@
 		<joda-time.version>2.8.2</joda-time.version>
 		<httpclient.version>4.5.1</httpclient.version>
 		<jackson2.version>2.5.4</jackson2.version>
-		<fastjson.version>1.2.7</fastjson.version>
+		<fastjson.version>1.2.25</fastjson.version>
 		<guava.version>18.0</guava.version>
 		<commons-io.version>1.3.2</commons-io.version>
         <commons-lang3.version>3.4</commons-lang3.version>
