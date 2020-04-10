@@ -35,7 +35,7 @@
         <java_target_version>1.6</java_target_version>
         <file_encoding>UTF-8</file_encoding>
         <!-- jar version -->
-		<springframework.version>4.2.1.RELEASE</springframework.version>
+		<springframework.version>5.2.5.RELEASE</springframework.version>
 		<spring-data-redis.version>1.6.0.RELEASE</spring-data-redis.version>
 		<jedis.version>2.7.3</jedis.version>
 
